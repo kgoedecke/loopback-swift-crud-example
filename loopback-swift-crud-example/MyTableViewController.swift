@@ -8,17 +8,17 @@
 
 import UIKit
 
-class MyTableViewController: UITableViewController, LBControllerProtocol {
+class MyTableViewController: UITableViewController  {
     lazy var lbController : LBController = LBController(delegate: self)
     
-    func didReceiveResultsFromRemote(results: [LBPersistedModel])  {
-        let testWidget = results[1] as! Widget
-    }
+    var widgets = [Widget]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let widgetRepo: WidgetRepository = WidgetRepository()
-        lbController.getModelsForRepository(widgetRepo)
+        
+        navigationItem.leftBarButtonItem = editButtonItem()
+        
+        lbController.getModelsForRepository(WidgetRepository())
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -37,17 +37,71 @@ class MyTableViewController: UITableViewController, LBControllerProtocol {
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            // Delete the row from the data source
+            lbController.deleteModelForRepositoryType(widgets[indexPath.row], repositoryType: WidgetRepository())
+            widgets.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        } else if editingStyle == .Insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 5
+        return widgets.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("tableCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("tableCell", forIndexPath: indexPath) as! WidgetTableViewCell
+        cell.nameLabel.text = widgets[indexPath.row].name
+        cell.valueLabel.text = String(widgets[indexPath.row].bars)
         return cell
+    }
+    
+    // MARK: - Edit and Add Widget Segue operations
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowDetail" {
+            let widgetDetailViewController = segue.destinationViewController as! WidgetViewController
+            if let selectedWidgetCell = sender as? WidgetTableViewCell {
+                let indexPath = tableView.indexPathForCell(selectedWidgetCell)!
+                let selectedWidget = widgets[indexPath.row]
+                widgetDetailViewController.widget = selectedWidget
+            }
+        }
+        else if segue.identifier == "AddItem" {
+            NSLog("Adding new widget")
+        }
+        
+    }
+    
+    @IBAction func unwindToWidgetList(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.sourceViewController as? WidgetViewController, widget = sourceViewController.widget {
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                widgets[selectedIndexPath.row] = widget
+                tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
+            }
+            else    {
+                let newIndexPath = NSIndexPath(forRow: widgets.count, inSection: 0)
+                widgets.append(widget)
+                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
+            }
+            
+        }
+    }
+}
+
+extension MyTableViewController: LBControllerDelegate   {
+    func didReceiveResultsFromRemote(results: [LBPersistedModel])  {
+        self.widgets = results as! [Widget]
+        self.tableView.reloadData()
     }
 }

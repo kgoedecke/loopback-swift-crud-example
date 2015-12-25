@@ -15,6 +15,8 @@
 		0AB5EB101C29B3EF00E59F9C /* MyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5EB0F1C29B3EF00E59F9C /* MyTableViewController.swift */; };
 		0AB5EB121C29B47000E59F9C /* LBController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5EB111C29B47000E59F9C /* LBController.swift */; };
 		0AB5EB141C29C4DA00E59F9C /* WidgetRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5EB131C29C4DA00E59F9C /* WidgetRepository.swift */; };
+		0ACF97371C2A4B3D007932F4 /* WidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACF97361C2A4B3D007932F4 /* WidgetViewController.swift */; };
+		0ACF97391C2A4D58007932F4 /* WidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACF97381C2A4D58007932F4 /* WidgetTableViewCell.swift */; };
 		AF9B10CCE37060ABFA728E6A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7637E7BF4AD9A0C821FC54F0 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +32,8 @@
 		0AB5EB0F1C29B3EF00E59F9C /* MyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewController.swift; sourceTree = "<group>"; };
 		0AB5EB111C29B47000E59F9C /* LBController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBController.swift; sourceTree = "<group>"; };
 		0AB5EB131C29C4DA00E59F9C /* WidgetRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetRepository.swift; sourceTree = "<group>"; };
+		0ACF97361C2A4B3D007932F4 /* WidgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetViewController.swift; sourceTree = "<group>"; };
+		0ACF97381C2A4D58007932F4 /* WidgetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetTableViewCell.swift; sourceTree = "<group>"; };
 		41CC217D6BCED850485A4753 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		5E29848C7C357D76D360459E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7637E7BF4AD9A0C821FC54F0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +84,8 @@
 				0AB5EB0C1C29B1F800E59F9C /* Swift-Bridging-Header.h */,
 				0AB5EAF81C29B13200E59F9C /* AppDelegate.swift */,
 				0AB5EB0F1C29B3EF00E59F9C /* MyTableViewController.swift */,
+				0ACF97361C2A4B3D007932F4 /* WidgetViewController.swift */,
+				0ACF97381C2A4D58007932F4 /* WidgetTableViewCell.swift */,
 				0AB5EB131C29C4DA00E59F9C /* WidgetRepository.swift */,
 				0AB5EB111C29B47000E59F9C /* LBController.swift */,
 				0AB5EAFC1C29B13200E59F9C /* SecondViewController.swift */,
@@ -221,10 +227,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ACF97391C2A4D58007932F4 /* WidgetTableViewCell.swift in Sources */,
 				0AB5EAFD1C29B13200E59F9C /* SecondViewController.swift in Sources */,
 				0AB5EB141C29C4DA00E59F9C /* WidgetRepository.swift in Sources */,
 				0AB5EB101C29B3EF00E59F9C /* MyTableViewController.swift in Sources */,
 				0AB5EAF91C29B13200E59F9C /* AppDelegate.swift in Sources */,
+				0ACF97371C2A4B3D007932F4 /* WidgetViewController.swift in Sources */,
 				0AB5EB121C29B47000E59F9C /* LBController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
