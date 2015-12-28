@@ -18,24 +18,28 @@ class WidgetViewController: UIViewController   {
     }
     
     var widget: Widget?
-    lazy var lbController : LBController = LBController()
+    lazy var repositoryController = LBRepositoryController(repositoryType: WidgetRepository.self)
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if saveButton === sender {
             if let existingWidget = widget {
                 existingWidget.name = nameTextField.text ?? ""
                 existingWidget.bars = Int(numberValueSlider.value)
-                lbController.updateModelForRepositoryType(existingWidget, repositoryType: WidgetRepository())
+                repositoryController.updateModel(existingWidget)
             }
             else    {
                 let name = nameTextField.text ?? ""
                 let numberValue = numberValueSlider.value
                 if (name != "") {
-                    self.widget = lbController.createModelForRepositoryType(WidgetRepository(),
-                        dictionary: [
-                            "name": name, "bars": Int(numberValue)
-                        ]
-                        ) as? Widget
+                    repositoryController.createModel(
+                        [
+                            "name": name,
+                            "bars": Int(numberValue)
+                        ], success:  {newWidget in
+                            NSLog("Successfully created")
+                            self.widget = newWidget as? Widget
+                        }
+                    )
                 }
             }
         }

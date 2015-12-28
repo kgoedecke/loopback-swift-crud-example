@@ -13,7 +13,7 @@
 		0AB5EB021C29B13200E59F9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AB5EB011C29B13200E59F9C /* Assets.xcassets */; };
 		0AB5EB051C29B13200E59F9C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AB5EB031C29B13200E59F9C /* LaunchScreen.storyboard */; };
 		0AB5EB101C29B3EF00E59F9C /* MyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5EB0F1C29B3EF00E59F9C /* MyTableViewController.swift */; };
-		0AB5EB121C29B47000E59F9C /* LBController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5EB111C29B47000E59F9C /* LBController.swift */; };
+		0AB5EB121C29B47000E59F9C /* LBRepositoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5EB111C29B47000E59F9C /* LBRepositoryController.swift */; };
 		0AB5EB141C29C4DA00E59F9C /* WidgetRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5EB131C29C4DA00E59F9C /* WidgetRepository.swift */; };
 		0ACF97371C2A4B3D007932F4 /* WidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACF97361C2A4B3D007932F4 /* WidgetViewController.swift */; };
 		0ACF97391C2A4D58007932F4 /* WidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACF97381C2A4D58007932F4 /* WidgetTableViewCell.swift */; };
@@ -30,7 +30,7 @@
 		0AB5EB061C29B13200E59F9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AB5EB0C1C29B1F800E59F9C /* Swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Swift-Bridging-Header.h"; sourceTree = "<group>"; };
 		0AB5EB0F1C29B3EF00E59F9C /* MyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewController.swift; sourceTree = "<group>"; };
-		0AB5EB111C29B47000E59F9C /* LBController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBController.swift; sourceTree = "<group>"; };
+		0AB5EB111C29B47000E59F9C /* LBRepositoryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBRepositoryController.swift; sourceTree = "<group>"; };
 		0AB5EB131C29C4DA00E59F9C /* WidgetRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetRepository.swift; sourceTree = "<group>"; };
 		0ACF97361C2A4B3D007932F4 /* WidgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetViewController.swift; sourceTree = "<group>"; };
 		0ACF97381C2A4D58007932F4 /* WidgetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetTableViewCell.swift; sourceTree = "<group>"; };
@@ -87,7 +87,7 @@
 				0ACF97361C2A4B3D007932F4 /* WidgetViewController.swift */,
 				0ACF97381C2A4D58007932F4 /* WidgetTableViewCell.swift */,
 				0AB5EB131C29C4DA00E59F9C /* WidgetRepository.swift */,
-				0AB5EB111C29B47000E59F9C /* LBController.swift */,
+				0AB5EB111C29B47000E59F9C /* LBRepositoryController.swift */,
 				0AB5EAFC1C29B13200E59F9C /* SecondViewController.swift */,
 				0AB5EAFE1C29B13200E59F9C /* Main.storyboard */,
 				0AB5EB011C29B13200E59F9C /* Assets.xcassets */,
@@ -233,7 +233,7 @@
 				0AB5EB101C29B3EF00E59F9C /* MyTableViewController.swift in Sources */,
 				0AB5EAF91C29B13200E59F9C /* AppDelegate.swift in Sources */,
 				0ACF97371C2A4B3D007932F4 /* WidgetViewController.swift in Sources */,
-				0AB5EB121C29B47000E59F9C /* LBController.swift in Sources */,
+				0AB5EB121C29B47000E59F9C /* LBRepositoryController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@
 import UIKit
 
 class MyTableViewController: UITableViewController  {
-    lazy var lbController : LBController = LBController(delegate: self)
+    lazy var repositoryController : LBRepositoryController = LBRepositoryController(repositoryType: WidgetRepository.self)
     
     var widgets = [Widget]()
     
@@ -18,7 +18,10 @@ class MyTableViewController: UITableViewController  {
         
         navigationItem.leftBarButtonItem = editButtonItem()
         
-        lbController.getModelsForRepository(WidgetRepository())
+        repositoryController.getModels { (fetchedWidgets: [LBPersistedModel]) -> () in
+            self.widgets = fetchedWidgets as! [Widget]
+            self.tableView.reloadData()
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -43,7 +46,7 @@ class MyTableViewController: UITableViewController  {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            lbController.deleteModelForRepositoryType(widgets[indexPath.row], repositoryType: WidgetRepository())
+            repositoryController.deleteModel(widgets[indexPath.row])
             widgets.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
@@ -96,12 +99,5 @@ class MyTableViewController: UITableViewController  {
             }
             
         }
-    }
-}
-
-extension MyTableViewController: LBControllerDelegate   {
-    func didReceiveResultsFromRemote(results: [LBPersistedModel])  {
-        self.widgets = results as! [Widget]
-        self.tableView.reloadData()
     }
 }
