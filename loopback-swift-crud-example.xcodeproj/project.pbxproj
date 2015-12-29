@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0AB5EAF91C29B13200E59F9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5EAF81C29B13200E59F9C /* AppDelegate.swift */; };
-		0AB5EAFD1C29B13200E59F9C /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5EAFC1C29B13200E59F9C /* SecondViewController.swift */; };
 		0AB5EB001C29B13200E59F9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AB5EAFE1C29B13200E59F9C /* Main.storyboard */; };
 		0AB5EB021C29B13200E59F9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AB5EB011C29B13200E59F9C /* Assets.xcassets */; };
 		0AB5EB051C29B13200E59F9C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AB5EB031C29B13200E59F9C /* LaunchScreen.storyboard */; };
@@ -17,13 +16,23 @@
 		0AB5EB141C29C4DA00E59F9C /* WidgetRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5EB131C29C4DA00E59F9C /* WidgetRepository.swift */; };
 		0ACF97371C2A4B3D007932F4 /* WidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACF97361C2A4B3D007932F4 /* WidgetViewController.swift */; };
 		0ACF97391C2A4D58007932F4 /* WidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACF97381C2A4D58007932F4 /* WidgetTableViewCell.swift */; };
+		0AECFE921C30F3BA006FC36B /* LBRepositoryControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AECFE911C30F3BA006FC36B /* LBRepositoryControllerTests.swift */; };
 		AF9B10CCE37060ABFA728E6A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7637E7BF4AD9A0C821FC54F0 /* libPods.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0AECFE941C30F3BA006FC36B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0AB5EAED1C29B13200E59F9C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0AB5EAF41C29B13200E59F9C;
+			remoteInfo = "loopback-swift-crud-example";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0AB5EAF51C29B13200E59F9C /* loopback-swift-crud-example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "loopback-swift-crud-example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AB5EAF81C29B13200E59F9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0AB5EAFC1C29B13200E59F9C /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		0AB5EAFF1C29B13200E59F9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0AB5EB011C29B13200E59F9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0AB5EB041C29B13200E59F9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -34,6 +43,9 @@
 		0AB5EB131C29C4DA00E59F9C /* WidgetRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetRepository.swift; sourceTree = "<group>"; };
 		0ACF97361C2A4B3D007932F4 /* WidgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetViewController.swift; sourceTree = "<group>"; };
 		0ACF97381C2A4D58007932F4 /* WidgetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetTableViewCell.swift; sourceTree = "<group>"; };
+		0AECFE8F1C30F3BA006FC36B /* loopback-swift-crud-example-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "loopback-swift-crud-example-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0AECFE911C30F3BA006FC36B /* LBRepositoryControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBRepositoryControllerTests.swift; sourceTree = "<group>"; };
+		0AECFE931C30F3BA006FC36B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41CC217D6BCED850485A4753 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		5E29848C7C357D76D360459E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7637E7BF4AD9A0C821FC54F0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,6 +57,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF9B10CCE37060ABFA728E6A /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0AECFE8C1C30F3BA006FC36B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				0AB5EAF71C29B13200E59F9C /* loopback-swift-crud-example */,
+				0AECFE901C30F3BA006FC36B /* loopback-swift-crud-example-tests */,
 				0AB5EAF61C29B13200E59F9C /* Products */,
 				083F316CE608A20DE28DC4BA /* Pods */,
 				1DFFE4F701D9677009DFDF85 /* Frameworks */,
@@ -74,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				0AB5EAF51C29B13200E59F9C /* loopback-swift-crud-example.app */,
+				0AECFE8F1C30F3BA006FC36B /* loopback-swift-crud-example-tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,13 +109,21 @@
 				0ACF97381C2A4D58007932F4 /* WidgetTableViewCell.swift */,
 				0AB5EB131C29C4DA00E59F9C /* WidgetRepository.swift */,
 				0AB5EB111C29B47000E59F9C /* LBRepositoryController.swift */,
-				0AB5EAFC1C29B13200E59F9C /* SecondViewController.swift */,
 				0AB5EAFE1C29B13200E59F9C /* Main.storyboard */,
 				0AB5EB011C29B13200E59F9C /* Assets.xcassets */,
 				0AB5EB031C29B13200E59F9C /* LaunchScreen.storyboard */,
 				0AB5EB061C29B13200E59F9C /* Info.plist */,
 			);
 			path = "loopback-swift-crud-example";
+			sourceTree = "<group>";
+		};
+		0AECFE901C30F3BA006FC36B /* loopback-swift-crud-example-tests */ = {
+			isa = PBXGroup;
+			children = (
+				0AECFE911C30F3BA006FC36B /* LBRepositoryControllerTests.swift */,
+				0AECFE931C30F3BA006FC36B /* Info.plist */,
+			);
+			path = "loopback-swift-crud-example-tests";
 			sourceTree = "<group>";
 		};
 		1DFFE4F701D9677009DFDF85 /* Frameworks */ = {
@@ -128,6 +157,24 @@
 			productReference = 0AB5EAF51C29B13200E59F9C /* loopback-swift-crud-example.app */;
 			productType = "com.apple.product-type.application";
 		};
+		0AECFE8E1C30F3BA006FC36B /* loopback-swift-crud-example-tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0AECFE981C30F3BA006FC36B /* Build configuration list for PBXNativeTarget "loopback-swift-crud-example-tests" */;
+			buildPhases = (
+				0AECFE8B1C30F3BA006FC36B /* Sources */,
+				0AECFE8C1C30F3BA006FC36B /* Frameworks */,
+				0AECFE8D1C30F3BA006FC36B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0AECFE951C30F3BA006FC36B /* PBXTargetDependency */,
+			);
+			name = "loopback-swift-crud-example-tests";
+			productName = "loopback-swift-crud-example-tests";
+			productReference = 0AECFE8F1C30F3BA006FC36B /* loopback-swift-crud-example-tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -140,6 +187,10 @@
 				TargetAttributes = {
 					0AB5EAF41C29B13200E59F9C = {
 						CreatedOnToolsVersion = 7.1;
+					};
+					0AECFE8E1C30F3BA006FC36B = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = 0AB5EAF41C29B13200E59F9C;
 					};
 				};
 			};
@@ -157,6 +208,7 @@
 			projectRoot = "";
 			targets = (
 				0AB5EAF41C29B13200E59F9C /* loopback-swift-crud-example */,
+				0AECFE8E1C30F3BA006FC36B /* loopback-swift-crud-example-tests */,
 			);
 		};
 /* End PBXProject section */
@@ -169,6 +221,13 @@
 				0AB5EB051C29B13200E59F9C /* LaunchScreen.storyboard in Resources */,
 				0AB5EB021C29B13200E59F9C /* Assets.xcassets in Resources */,
 				0AB5EB001C29B13200E59F9C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0AECFE8D1C30F3BA006FC36B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,7 +287,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0ACF97391C2A4D58007932F4 /* WidgetTableViewCell.swift in Sources */,
-				0AB5EAFD1C29B13200E59F9C /* SecondViewController.swift in Sources */,
 				0AB5EB141C29C4DA00E59F9C /* WidgetRepository.swift in Sources */,
 				0AB5EB101C29B3EF00E59F9C /* MyTableViewController.swift in Sources */,
 				0AB5EAF91C29B13200E59F9C /* AppDelegate.swift in Sources */,
@@ -237,7 +295,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0AECFE8B1C30F3BA006FC36B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0AECFE921C30F3BA006FC36B /* LBRepositoryControllerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0AECFE951C30F3BA006FC36B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0AB5EAF41C29B13200E59F9C /* loopback-swift-crud-example */;
+			targetProxy = 0AECFE941C30F3BA006FC36B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0AB5EAFE1C29B13200E59F9C /* Main.storyboard */ = {
@@ -366,6 +440,32 @@
 			};
 			name = Release;
 		};
+		0AECFE961C30F3BA006FC36B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41CC217D6BCED850485A4753 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "loopback-swift-crud-example-tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.kevingoedecke.loopback-swift-crud-example-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/loopback-swift-crud-example.app/loopback-swift-crud-example";
+			};
+			name = Debug;
+		};
+		0AECFE971C30F3BA006FC36B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E29848C7C357D76D360459E /* Pods.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "loopback-swift-crud-example-tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.kevingoedecke.loopback-swift-crud-example-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/loopback-swift-crud-example.app/loopback-swift-crud-example";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -386,6 +486,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		0AECFE981C30F3BA006FC36B /* Build configuration list for PBXNativeTarget "loopback-swift-crud-example-tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0AECFE961C30F3BA006FC36B /* Debug */,
+				0AECFE971C30F3BA006FC36B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
