@@ -25,7 +25,6 @@ class LBRepositoryController  {
     func getModels(success succeed: [LBPersistedModel] -> ())   {
         self.repository.allWithSuccess({ (models: [AnyObject]!) -> Void in
             NSLog("Successfully received all Models for Repository Type")
-            //self.delegate!.didReceiveResultsFromRemote(models as! [LBPersistedModel])
             succeed(models as! [LBPersistedModel])
             }) { (error: NSError!) -> Void in
                 NSLog("Error retrieving Models for Repository Type.")
@@ -42,7 +41,6 @@ class LBRepositoryController  {
     func getModels(filter: Dictionary<String, Dictionary<String, String>>, success succeed: [LBPersistedModel] -> ())    {
         self.repository.findWithFilter(filter, success: { (models: [AnyObject]!) -> Void in
             NSLog("Successfully received all filtered Models for Repository Type")
-            //self.delegate!.didReceiveResultsFromRemote(models as! [LBPersistedModel])
             succeed(models as! [LBPersistedModel])
             }) { (error: NSError!) -> Void in
                 NSLog("Error retrieving Models with given Filter for Repository Type.")

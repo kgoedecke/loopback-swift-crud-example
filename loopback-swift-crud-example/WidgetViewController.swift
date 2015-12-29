@@ -14,7 +14,8 @@ class WidgetViewController: UIViewController   {
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
     @IBAction func cancelButton(sender: UIBarButtonItem) {
-        dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
+        navigationController!.popViewControllerAnimated(true)
     }
     
     var widget: Widget?
@@ -29,17 +30,12 @@ class WidgetViewController: UIViewController   {
             }
             else    {
                 let name = nameTextField.text ?? ""
-                let numberValue = numberValueSlider.value
+                let numberValue = Int(numberValueSlider.value)
                 if (name != "") {
-                    repositoryController.createModel(
-                        [
-                            "name": name,
-                            "bars": Int(numberValue)
-                        ], success:  {newWidget in
-                            NSLog("Successfully created")
-                            self.widget = newWidget as? Widget
-                        }
-                    )
+                    var newWidget = Widget()
+                    newWidget.name = name
+                    newWidget.bars = numberValue
+                    self.widget = newWidget
                 }
             }
         }

@@ -94,10 +94,18 @@ class MyTableViewController: UITableViewController  {
             }
             else    {
                 let newIndexPath = NSIndexPath(forRow: widgets.count, inSection: 0)
-                widgets.append(widget)
-                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
+                repositoryController.createModel(
+                    [
+                        "name": widget.name,
+                        "bars": widget.bars
+                    ], success:  {newWidget in
+                        NSLog("Successfully created")
+                        self.widgets.append(newWidget as! Widget)
+                        self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
+                    }
+                )
+                
             }
-            
         }
     }
 }
