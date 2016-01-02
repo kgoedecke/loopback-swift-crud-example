@@ -9,9 +9,6 @@
 import Foundation
 
 class WidgetRepository : LBPersistedModelRepository     {
-    override init!(className name: String!) {
-        super.init(className: "widgets")
-    }
     override init() {
         super.init(className: "widgets")
     }
