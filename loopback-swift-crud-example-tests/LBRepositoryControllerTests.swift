@@ -12,13 +12,6 @@ import XCTest
 class LBRepositoryControllerTests: XCTestCase {
     lazy var testController : LBRepositoryController = LBRepositoryController(repositoryType: WidgetRepository.self)
     
-    var widgets = [Widget]()
-    
-    var createDelgateExpectation:XCTestExpectation?
-    var deleteDelgateExpectation:XCTestExpectation?
-    var getAllDelgateExpectation:XCTestExpectation?
-    var getAllWithFilterDelgateExpectation:XCTestExpectation?
-    
     override func setUp() {
         super.setUp()
     }
@@ -28,80 +21,72 @@ class LBRepositoryControllerTests: XCTestCase {
     }
     
     func testCreateModelToRepositoryType() {
-        self.widgets = [Widget]()
-        
-        createDelgateExpectation = expectationWithDescription("Create Model Callback Expectation")
+        var widgets = [Widget]()
+        let createDelgateExpectation = expectationWithDescription("Create Model Callback Expectation")
         let timestamp = String(NSDate().timeIntervalSince1970)
+
+        testController.createModel(["name": timestamp]) { model in
+            self.testController.getModels(["where" : ["name" : timestamp]]) { models in
+                widgets = models as! [Widget]
+                createDelgateExpectation.fulfill()
+            }
+        }
         
-        var testWidget: Widget = Widget()
-        testController.createModel(["name": timestamp], success: { model in
-            testWidget = model as! Widget
-            self.testController.getModels(["where" : ["name" : timestamp]], success: {models in
-                self.widgets = models as! [Widget]
-                self.createDelgateExpectation?.fulfill()
-            })
-        })
-        
-        waitForExpectationsWithTimeout(500, handler: { error in XCTAssertNil(error, "Callback method not called")})
+        waitForExpectationsWithTimeout(500) { error in XCTAssertNil(error, "Callback method not called") }
         
         XCTAssertEqual(widgets.count, 1)
     }
     
     func testGetAllModelsFromRemote()   {
-        self.widgets = [Widget]()
-        
-        getAllDelgateExpectation = expectationWithDescription("Get All Models Callback Expectation")
+        var widgets = [Widget]()
+        let getAllDelgateExpectation = expectationWithDescription("Get All Models Callback Expectation")
         
         testController.getModels(success: {models in
-            self.widgets = models as! [Widget]
-            self.getAllDelgateExpectation?.fulfill()
+            widgets = models as! [Widget]
+            getAllDelgateExpectation.fulfill()
         })
         
-        waitForExpectationsWithTimeout(500, handler: { error in XCTAssertNil(error, "Callback method not called")
-        })
+        waitForExpectationsWithTimeout(500) { error in XCTAssertNil(error, "Callback method not called") }
         
-        XCTAssertNotNil(self.widgets)
-        XCTAssertGreaterThan(self.widgets.count, 0)
-        XCTAssertEqual("Foo", self.widgets[0].name)
-        XCTAssertEqual(0, self.widgets[0].bars)
-        XCTAssertNotNil(self.widgets[0]._id)
+        XCTAssertNotNil(widgets)
+        XCTAssertGreaterThan(widgets.count, 0)
+        XCTAssertEqual("Foo", widgets[0].name)
+        XCTAssertEqual(0, widgets[0].bars)
+        XCTAssertNotNil(widgets[0]._id)
     }
     
     func testGetAllModelsWithFilter()   {
-        self.widgets = [Widget]()
+        var widgets = [Widget]()
+        let getAllWithFilterDelgateExpectation = expectationWithDescription("Get All Models With Filter Callback Expectation")
         
-        getAllWithFilterDelgateExpectation = expectationWithDescription("Get All Models With Filter Callback Expectation")
+        testController.getModels(["where": ["name": "Foo"]]) { models in
+            widgets = models as! [Widget]
+            getAllWithFilterDelgateExpectation.fulfill()
+        }
         
-        testController.getModels(["where": ["name": "Foo"]], success: {models in
-            self.widgets = models as! [Widget]
-            self.getAllWithFilterDelgateExpectation?.fulfill()
-        })
+        waitForExpectationsWithTimeout(500) { error in XCTAssertNil(error, "Callback method not called") }
         
-        waitForExpectationsWithTimeout(500, handler: { error in XCTAssertNil(error, "Callback method not called")
-        })
-        
-        XCTAssertNotNil(self.widgets)
-        XCTAssertEqual(self.widgets.count, 1)
-        XCTAssertEqual("Foo", self.widgets[0].name)
-        XCTAssertEqual(0, self.widgets[0].bars)
+        XCTAssertNotNil(widgets)
+        XCTAssertEqual(widgets.count, 1)
+        XCTAssertEqual("Foo", widgets[0].name)
+        XCTAssertEqual(0, widgets[0].bars)
     }
     
     func testDeleteModelForRepositoryType() {
-        self.widgets = [Widget]()
-        
-        deleteDelgateExpectation = expectationWithDescription("Delete Model Callback Expectation")
+        var widgets = [Widget]()
+        let deleteDelgateExpectation = expectationWithDescription("Delete Model Callback Expectation")
         
         let timestamp = String(NSDate().timeIntervalSince1970)
-        testController.createModel(["name": timestamp], success: {model in
-            self.testController.deleteModel(model as! Widget, success: {
-                self.testController.getModels(["where" : ["name" : timestamp]], success: {models in
-                    self.widgets = models as! [Widget]
-                    self.deleteDelgateExpectation?.fulfill()
-                })
-            })
-        })
+        testController.createModel(["name": timestamp]) { model in
+            self.testController.deleteModel(model as! Widget) {
+                self.testController.getModels(["where" : ["name" : timestamp]]) { models in
+                    widgets = models as! [Widget]
+                    deleteDelgateExpectation.fulfill()
+                }
+            }
+        }
         
-        waitForExpectationsWithTimeout(500, handler: { error in XCTAssertNil(error, "Callback method not called")})
+        waitForExpectationsWithTimeout(500) { error in XCTAssertNil(error, "Callback method not called") }
         
         XCTAssertEqual(widgets.count, 0)
     }

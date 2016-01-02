@@ -98,13 +98,11 @@ class MyTableViewController: UITableViewController  {
                     [
                         "name": widget.name,
                         "bars": widget.bars
-                    ], success:  {newWidget in
+                    ]) { newWidget in
                         NSLog("Successfully created")
                         self.widgets.append(newWidget as! Widget)
                         self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
                     }
-                )
-                
             }
         }
     }
