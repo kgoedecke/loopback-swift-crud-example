@@ -29,7 +29,7 @@ class WidgetViewController: UIViewController   {
                 repositoryController.updateModel(existingWidget)
             }
             else    {
-                if let name = nameTextField.text {
+                if let name = nameTextField.text where name != "" {
                     let newWidget = Widget()
                     newWidget.name = name
                     newWidget.bars = Int(numberValueSlider.value)
