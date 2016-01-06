@@ -9,7 +9,6 @@
 import UIKit
 
 class MyTableViewController: UITableViewController  {
-    lazy var repositoryController : LBRepositoryController = LBRepositoryController(repositoryType: WidgetRepository.self)
     
     var widgets = [Widget]()
     
@@ -18,9 +17,11 @@ class MyTableViewController: UITableViewController  {
         
         navigationItem.leftBarButtonItem = editButtonItem()
         
-        repositoryController.getModels { (fetchedWidgets: [LBPersistedModel]) -> () in
+        AppDelegate.widgetRepository.allWithSuccess({ (fetchedWidgets: [AnyObject]!) -> Void in
             self.widgets = fetchedWidgets as! [Widget]
             self.tableView.reloadData()
+            }) { (error: NSError!) -> Void in
+                NSLog(error.description)
         }
     }
     
@@ -46,9 +47,12 @@ class MyTableViewController: UITableViewController  {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            repositoryController.deleteModel(widgets[indexPath.row])
-            widgets.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            widgets[indexPath.row].destroyWithSuccess({ () -> Void in
+                self.widgets.removeAtIndex(indexPath.row)
+                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                }, failure: { (error: NSError!) -> Void in
+                    NSLog(error.description)
+            })
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
@@ -94,15 +98,8 @@ class MyTableViewController: UITableViewController  {
             }
             else    {
                 let newIndexPath = NSIndexPath(forRow: widgets.count, inSection: 0)
-                repositoryController.createModel(
-                    [
-                        "name": widget.name,
-                        "bars": widget.bars
-                    ]) { newWidget in
-                        NSLog("Successfully created")
-                        self.widgets.append(newWidget as! Widget)
-                        self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
-                    }
+                self.widgets.append(widget)
+                self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
             }
         }
     }

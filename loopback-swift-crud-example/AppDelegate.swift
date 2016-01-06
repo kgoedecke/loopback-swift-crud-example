@@ -13,7 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    var adapter:LBRESTAdapter = LBRESTAdapter(URL: NSURL(string: "http://localhost:3000"))
+    static let adapter = LBRESTAdapter(URL: NSURL(string: "http://localhost:3000"))
+    static let widgetRepository = adapter.repositoryWithClass(WidgetRepository) as! WidgetRepository
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {

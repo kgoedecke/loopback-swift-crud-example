@@ -18,10 +18,3 @@ class WidgetRepository : LBPersistedModelRepository     {
     
 }
 
-class Widget : LBPersistedModel {
-    var name: String!
-    var bars: NSNumber!
-    var date: NSDate!
-    var data: NSObject!
-}
-

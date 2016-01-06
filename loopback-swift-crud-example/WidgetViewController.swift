@@ -19,21 +19,28 @@ class WidgetViewController: UIViewController   {
     }
     
     var widget: Widget?
-    lazy var repositoryController = LBRepositoryController(repositoryType: WidgetRepository.self)
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if saveButton === sender {
-            if let existingWidget = widget {
-                existingWidget.name = nameTextField.text ?? ""
-                existingWidget.bars = Int(numberValueSlider.value)
-                repositoryController.updateModel(existingWidget)
+            if let _ = widget {
+                widget!.name = nameTextField.text ?? ""
+                widget!.bars = Int(numberValueSlider.value)
+                widget?.saveWithSuccess({ () -> Void in
+                    NSLog("Successfully updated Widget")
+                    }, failure: { (error: NSError!) -> Void in
+                        NSLog(error.description)
+                })
             }
             else    {
                 if let name = nameTextField.text {
-                    let newWidget = Widget()
-                    newWidget.name = name
-                    newWidget.bars = Int(numberValueSlider.value)
-                    self.widget = newWidget
+                    widget = AppDelegate.widgetRepository.modelWithDictionary(nil) as? Widget
+                    widget!.name = name
+                    widget!.bars = Int(self.numberValueSlider.value)
+                    widget?.saveWithSuccess({ () -> Void in
+                        NSLog("Successfully created new Widget")
+                        }, failure: { (error: NSError!) -> Void in
+                            NSLog(error.description)
+                    })
                 }
             }
         }
