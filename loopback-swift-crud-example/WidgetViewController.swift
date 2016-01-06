@@ -32,7 +32,7 @@ class WidgetViewController: UIViewController   {
                 })
             }
             else    {
-                if let name = nameTextField.text {
+                if let name = nameTextField.text where name != "" {
                     widget = AppDelegate.widgetRepository.modelWithDictionary(nil) as? Widget
                     widget!.name = name
                     widget!.bars = Int(self.numberValueSlider.value)
