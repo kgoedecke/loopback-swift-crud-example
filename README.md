@@ -6,7 +6,6 @@ Swift App using the LoopBack iOS SDK providing basic CRUD operations
 2. Fully written in Swift
 3. Features: Create, Read, Update and Delete objects on your LoopBack Backend
 4. LoopBack Test App included (See: [LoopBack Test App](https://github.com/kgoedecke/loopback-swift-crud-example/tree/master/loopback-swift-crud-example-tests/server))
-4. Unit Tests included (See: [LBRepositoryControllerTests](https://github.com/kgoedecke/loopback-swift-crud-example/blob/master/loopback-swift-crud-example-tests/LBRepositoryControllerTests.swift))
 
 ## Screenshots
 <img src="https://cloud.githubusercontent.com/assets/5519740/12044549/93e4dd12-ae93-11e5-8d68-b6fcb8feaf7b.jpg" width="210">
