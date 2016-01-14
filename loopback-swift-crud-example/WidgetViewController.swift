@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class WidgetViewController: UIViewController   {
     @IBOutlet weak var nameTextField: UITextField!
@@ -18,14 +19,17 @@ class WidgetViewController: UIViewController   {
         navigationController!.popViewControllerAnimated(true)
     }
     
-    var widget: Widget?
+    var widget: WidgetLocal?
+    let realm = try! Realm()
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if saveButton === sender {
             if let _ = widget {
-                widget!.name = nameTextField.text ?? ""
-                widget!.bars = Int(numberValueSlider.value)
-                widget?.saveWithSuccess({ () -> Void in
+                try! realm.write {
+                    widget!.name = nameTextField.text ?? ""
+                    widget!.bars = Int(numberValueSlider.value)
+                }
+                widget?.widgetRemote?.saveWithSuccess({ () -> Void in
                     NSLog("Successfully updated Widget")
                     }, failure: { (error: NSError!) -> Void in
                         NSLog(error.description)
@@ -33,14 +37,18 @@ class WidgetViewController: UIViewController   {
             }
             else    {
                 if let name = nameTextField.text where name != "" {
-                    widget = AppDelegate.widgetRepository.modelWithDictionary(nil) as? Widget
-                    widget!.name = name
-                    widget!.bars = Int(self.numberValueSlider.value)
-                    widget?.saveWithSuccess({ () -> Void in
-                        NSLog("Successfully created new Widget")
+                    let widgetRemote = AppDelegate.widgetRepository.modelWithDictionary(nil) as! Widget
+                    widgetRemote.name = name
+                    widgetRemote.bars = Int(self.numberValueSlider.value)
+                    widgetRemote.saveWithSuccess({ () -> Void in
+                        self.widget = WidgetLocal(widget: widgetRemote)
+                        try! self.realm.write {
+                            self.realm.add(self.widget!, update: true)
+                        }
                         }, failure: { (error: NSError!) -> Void in
                             NSLog(error.description)
                     })
+                    // TODO: Solve issues when remote not reachable (Primary Key, Sync after Backend is back online)
                 }
             }
         }
@@ -50,7 +58,7 @@ class WidgetViewController: UIViewController   {
         super.viewDidLoad()
         if let widget = widget  {
             nameTextField.text = widget.name
-            numberValueSlider.value = widget.bars as Float
+            numberValueSlider.value = Float(widget.bars)
         }
     }
     

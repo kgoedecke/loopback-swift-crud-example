@@ -1,5 +1,6 @@
 var loopback = require('loopback');
 var path = require('path');
+var moment = require('moment');
 var app = loopback();
 app.set('legacyExplorer', false);
 //app.use(loopback.logger(app.get('env') === 'development' ? 'dev' : 'default'));
@@ -26,20 +27,31 @@ var Widget = app.model('widget', {
       type: Boolean,
       required: false
     },
-    flag2: {
-      type: Boolean,
-      required: false
-    },
-    date: {
+    updated: {
       type: Date,
-      required: false
-    },
-    data: {
-      type: Object,
-      required: false
+      required: true
     }
   },
   dataSource: 'Memory'
+});
+
+Widget.observe('before save', function updateTimestamp(ctx, next) {
+  if (ctx.instance) {
+    console.log("New");
+    ctx.instance.updated = new Date();
+  } else {
+    console.log("Update");
+    var remoteDate = moment(ctx.currentInstance.updated);
+    var reqDate = moment(ctx.data.updated);
+
+    // If remote date is after request date drop the request
+    if (remoteDate.isAfter(reqDate)) {
+      console.log("Don't exec update");
+      ctx.data = ctx.currentInstance;
+    }
+
+  }
+  next(); 
 });
 
 var lbpn = require('loopback-component-push');
@@ -61,14 +73,12 @@ Widget.destroyAll(function () {
   Widget.create({
     name: 'Foo',
     bars: 0,
-    data: {
-      quux: true
-    }
+    updated: '2018-01-02T03:04:05.006Z'
   });
   Widget.create({
     name: 'Bar',
     bars: 1,
-    date: '2000-01-02T03:04:05.006Z'
+    updated: '2017-01-02T03:04:05.006Z'
   });
 });
 

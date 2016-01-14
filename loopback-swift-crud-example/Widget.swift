@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import LoopBack
 
 class Widget : LBPersistedModel {
     var name: String!
     var bars: NSNumber!
     var date: NSDate!
     var data: NSObject!
+    var updated: NSDate!
 }

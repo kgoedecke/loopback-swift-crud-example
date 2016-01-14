@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import LoopBack
 
 class WidgetRepository : LBPersistedModelRepository     {
     override init() {

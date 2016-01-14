@@ -7,22 +7,34 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MyTableViewController: UITableViewController  {
     
-    var widgets = [Widget]()
+    let realm = try! Realm()
+    var widgetsLocal = [WidgetLocal]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationItem.leftBarButtonItem = editButtonItem()
         
+        // We now load all data from the backend and override the realm data
+        // In case the backend is not reachable we still have access to our local realm data
         AppDelegate.widgetRepository.allWithSuccess({ (fetchedWidgets: [AnyObject]!) -> Void in
-            self.widgets = fetchedWidgets as! [Widget]
+            for widget in fetchedWidgets as! [Widget] {
+                try! self.realm.write {
+                    let newWidget = WidgetLocal(widget: widget)
+                    self.realm.add(newWidget, update: true)
+                    self.widgetsLocal.append(newWidget)
+                }
+            }
             self.tableView.reloadData()
-            }) { (error: NSError!) -> Void in
+            }, failure: { (error: NSError!) -> Void in
                 NSLog(error.description)
-        }
+                // In case backend is down refresh for realm data
+                self.widgetsLocal = Array(self.realm.objects(WidgetLocal))
+                self.tableView.reloadData()
+        })
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -47,8 +59,11 @@ class MyTableViewController: UITableViewController  {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            widgets[indexPath.row].destroyWithSuccess({ () -> Void in
-                self.widgets.removeAtIndex(indexPath.row)
+            widgetsLocal[indexPath.row].widgetRemote.destroyWithSuccess({ () -> Void in
+                try! self.realm.write {
+                    self.realm.delete(self.widgetsLocal[indexPath.row])
+                }
+                self.widgetsLocal.removeAtIndex(indexPath.row)
                 self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
                 }, failure: { (error: NSError!) -> Void in
                     NSLog(error.description)
@@ -63,13 +78,13 @@ class MyTableViewController: UITableViewController  {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return widgets.count
+        return widgetsLocal.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("tableCell", forIndexPath: indexPath) as! WidgetTableViewCell
-        cell.nameLabel.text = widgets[indexPath.row].name
-        cell.valueLabel.text = String(widgets[indexPath.row].bars)
+        cell.nameLabel.text = widgetsLocal[indexPath.row].name
+        cell.valueLabel.text = String(widgetsLocal[indexPath.row].bars)
         return cell
     }
     
@@ -80,7 +95,7 @@ class MyTableViewController: UITableViewController  {
             let widgetDetailViewController = segue.destinationViewController as! WidgetViewController
             if let selectedWidgetCell = sender as? WidgetTableViewCell {
                 let indexPath = tableView.indexPathForCell(selectedWidgetCell)!
-                let selectedWidget = widgets[indexPath.row]
+                let selectedWidget = widgetsLocal[indexPath.row]
                 widgetDetailViewController.widget = selectedWidget
             }
         }
@@ -93,12 +108,12 @@ class MyTableViewController: UITableViewController  {
     @IBAction func unwindToWidgetList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.sourceViewController as? WidgetViewController, widget = sourceViewController.widget {
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                widgets[selectedIndexPath.row] = widget
+                widgetsLocal[selectedIndexPath.row] = widget
                 tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
             }
             else    {
-                let newIndexPath = NSIndexPath(forRow: widgets.count, inSection: 0)
-                self.widgets.append(widget)
+                let newIndexPath = NSIndexPath(forRow: widgetsLocal.count, inSection: 0)
+                self.widgetsLocal.append(widget)
                 self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
             }
         }
