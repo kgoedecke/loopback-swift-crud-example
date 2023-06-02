@@ -16,4 +16,4 @@ Swift App using the LoopBack iOS SDK providing basic CRUD operations
 - Insert your LoopBack API URL into the projects AppDelegate.swift
 
 ## Tutorial
-- [KevinGoedecke.me - Tutorial: LoopBack Swift CRUD Example App](http://kevingoedecke.me/2015/12/29/loopback-swift-example-crud-app/)
+- [KevinGoedecke.com - Tutorial: LoopBack Swift CRUD Example App](http://kevingoedecke.com/2015/12/29/loopback-swift-example-crud-app/)
